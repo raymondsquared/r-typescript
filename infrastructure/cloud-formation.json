@@ -1,0 +1,104 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Description": "R Typescript API infrastructure template.",
+  "Mappings": {
+    "EnvironmentMap": {
+      "development": {
+        "id": 196114583512,
+        "camelSuffix": "dev",
+        "pascalSuffix": "Dev"
+      },
+      "production": {
+        "id": 126574484161,
+        "camelSuffix": "prod",
+        "pascalSuffix": "Prod"
+      }
+    }
+  },
+  "Parameters": {
+    "EnvironmentParameter": {
+      "Type": "String",
+      "Default": "development",
+      "AllowedValues": ["development", "production"],
+      "Description": "Environment"
+    }
+  },
+  "Conditions": {
+    "IsProduction": {
+      "Fn::Equals": [
+        {
+          "Ref": "EnvironmentParameter"
+        },
+        "production"
+      ]
+    }
+  },
+  "Resources": {
+    "ServiceRole": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "Service": ["ecs-tasks.amazonaws.com"]
+              },
+              "Action": ["sts:AssumeRole"]
+            }
+          ]
+        },
+        "MaxSessionDuration": 43200,
+        "Policies": [
+          {
+            "PolicyName": "ecs-policy",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Effect": "Allow",
+                  "Action": [
+                    "ec2:DescribeTags",
+                    "ecs:CreateCluster",
+                    "ecs:DeregisterContainerInstance",
+                    "ecs:DiscoverPollEndpoint",
+                    "ecs:Poll",
+                    "ecs:RegisterContainerInstance",
+                    "ecs:StartTelemetrySession",
+                    "ecs:UpdateContainerInstancesState",
+                    "ecs:Submit*",
+                    "ecr:GetAuthorizationToken",
+                    "ecr:BatchCheckLayerAvailability",
+                    "ecr:GetDownloadUrlForLayer",
+                    "ecr:BatchGetImage",
+                    "logs:CreateLogStream",
+                    "logs:PutLogEvents"
+                  ],
+                  "Resource": "*"
+                }
+              ]
+            }
+          }
+        ],
+        "RoleName": {
+          "Fn::Join": [
+            "-",
+            [
+              "r-typescript-role",
+              {
+                "Fn::FindInMap": [
+                  "EnvironmentMap",
+                  {
+                    "Ref": "EnvironmentParameter"
+                  },
+                  "camelSuffix"
+                ]
+              }
+            ]
+          ]
+        }
+      }
+    }
+  }
+}

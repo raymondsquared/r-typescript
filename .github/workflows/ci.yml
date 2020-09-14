@@ -1,0 +1,30 @@
+name: Continuous Integration
+
+on:
+  push:
+    branches:
+      - master
+      - 'releases/**'
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Setup Node 16
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      # TO DO: Commenting it ouy to save some cost
+      # - name: Install dependencies
+      #   run: npm install
+      # - name: Test
+      #   run: npm test
+      # - name: Build code
+      #   run: npm run build
+      # - name: TO DO
+      #   run: |
+      #     echo 'Package docker'
+      #     echo 'Package into an artifact'
+      #     echo 'Publish package'

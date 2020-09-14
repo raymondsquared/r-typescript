@@ -1,0 +1,18 @@
+# Test
+/tests/*
+coverage
+
+# CI/CD
+dist
+
+# Environment
+.env
+
+# JavaScript
+node_modules
+
+# VS Code
+.vscode
+
+# Mongo
+mongo.js

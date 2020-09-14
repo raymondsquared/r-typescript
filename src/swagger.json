@@ -1,0 +1,93 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "description": "API Documentation for R API",
+    "version": "0.0.1",
+    "title": "Swagger for R API",
+    "contact": { "email": "raymond_squared@live.com" }
+  },
+  "servers": [],
+  "tags": [
+    {
+      "name": "domain",
+      "description": "Domain related description"
+    }
+  ],
+  "schemes": ["https"],
+  "paths": {
+    "/api/v1/domain/:id": {
+      "get": {
+        "tags": ["domain"],
+        "description": "Returned a single Domain",
+        "operationId": "getOneDomain",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "id",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful get operation",
+            "schema": {
+              "type": "object",
+              "items": { "$ref": "#/components/schemas/Output" }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Domain": {
+        "type": "object",
+        "properties": {
+          "domainID": {
+            "type": "string"
+          },
+          "dateTime": {
+            "type": "string"
+          },
+          "numeric": {
+            "type": "number"
+          },
+          "ownerAccountID": {
+            "type": "string"
+          },
+          "isValidated": {
+            "type": "boolean"
+          }
+        }
+      },
+      "RError": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "number"
+          },
+          "httpStatusCode": {
+            "type": "number"
+          },
+          "errorString": {
+            "type": "string"
+          }
+        }
+      },
+      "Output": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/Domain"
+          },
+          "error": {
+            "$ref": "#/components/schemas/RError"
+          }
+        }
+      }
+    }
+  }
+}
