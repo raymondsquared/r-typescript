@@ -79,6 +79,7 @@ npm run start
 - [ ] Healthcheck endpoint
 - [ ] OpenAPI 3 Docs (Swagger)
 - [ ] Infrastructure as Code (Cloud Formation)
+- [ ] EKS - Kubernetes with Helm
 - [ ] Cloudfront CDN
 - [ ] CI/CD with GitHub Action
 - [ ] SAST with GitHub Action - CodeQL
@@ -97,8 +98,7 @@ npm run start
 
 ## To Do
 
-- Queue
-- EKS
+- CloudEvents + Messaging for asynchronous processing (POST, PUT, PATCH, DELETE)
 - AWS Well Architected
 - Chaos Engineering
 
