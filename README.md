@@ -98,7 +98,16 @@ npm run start
 
 ## To Do
 
-- CloudEvents + Messaging for asynchronous processing (POST, PUT, PATCH, DELETE)
+- 3 musketeers
+- Protobuff instead of JSON
+- CloudEvents + Messaging for asynchronous processing (POST, PUT, PATCH, DELETE) -> Queue or Kafka
+- Logging (OpenTelemetry) - Aggregator/Streaming, Stucture Data - 4 golden signals + golden triangle
+- Publish to Data Lake (Parquet)
+- Event Sourcing / CQRS
+- Simulate caching
+- Pact
+- GraphQL compatibility
+- API Test - E2E
 - AWS Well Architected
 - Chaos Engineering
 
